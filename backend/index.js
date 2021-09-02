@@ -151,13 +151,13 @@ app.post("/auth", async (req, res) => {
   }
 });
 
-app.get("/mmop/:useremail", function (req, res) {
-  SignUp.findOne({ useremail: req.params.useremail }).then((result) => {
-    res.json(result);
-    // res.send(result)
-    console.log(result);
-  });
-});
+// app.get("/mmop/:useremail", function (req, res) {
+//   SignUp.findOne({ useremail: req.params.useremail }).then((result) => {
+//     res.json(result);
+//     // res.send(result)
+//     console.log(result);
+//   });
+// });
 
 const port = 8000;
 app.listen(port, () => {
