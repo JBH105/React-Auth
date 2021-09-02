@@ -22,14 +22,15 @@ class Login extends Component {
       password: this.state.password,
     };
 
+    console.log(data);
     axios
       .post("http://localhost:8000/auth", data)
       .then((result) => {
         console.log(result.data);
-        if (result.data === true) {
+        if (result.data) {
           this.props.history.push("/profile");
-          localStorage.setItem("login", true);
-        } else if (result.data === false) {
+          // localStorage.setItem("login");
+        } else if (result.data) {
           this.setState({ error: true });
         }
       })
@@ -40,7 +41,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <input
           type="email"
           name="email"
@@ -80,7 +81,6 @@ class Login extends Component {
         ) : (
           ""
         )}
-
       </div>
     );
   }

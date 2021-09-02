@@ -6,27 +6,34 @@ import Create from "./components/Create";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import PopUp from "./components/PopUp";
+import TextFile from "./FunctionCommponet/TextFile";
+import FunHome from "./FunctionCommponet/FunHome";
 
 function App() {
   return (
-    
     <div>
-        <Router>
+      <FunHome />
+      <Router>
         <Navbar bg="light" expand="lg">
-    <Container>
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="#home"><Link to="/">Home</Link></Nav.Link>
-          <Nav.Link href="#link"><Link to="/Profile">Data</Link></Nav.Link>
-          <Nav.Link href="#link"><Link to="/Create">Create</Link></Nav.Link>
-          {/* <Nav.Link href="#link"><Link to="/Updete">Updete</Link></Nav.Link> */}
-
-      </Nav>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
+          <Container>
+            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#home">
+                  <Link to="/">Home</Link>
+                </Nav.Link>
+                <Nav.Link href="#link">
+                  <Link to="/Profile">Data</Link>
+                </Nav.Link>
+                <Nav.Link href="#link">
+                  <Link to="/Create">Create</Link>
+                </Nav.Link>
+                {/* <Nav.Link href="#link"><Link to="/Updete">Updete</Link></Nav.Link> */}
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         {/* <ul>
           <li>
             <Link to="/">Home</Link>
@@ -43,7 +50,7 @@ function App() {
           <Profile />
         </Route>
         <Route path="/Create">
-          <Create/>
+          <Create />
         </Route>
         {/* <Route path="/Updete/:id" render={
           props=>{
@@ -54,6 +61,7 @@ function App() {
         </Route> */}
       </Router>
       {/* <PopUp /> */}
+      <TextFile />
     </div>
   );
 }

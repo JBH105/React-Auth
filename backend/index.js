@@ -64,6 +64,20 @@ app.put("/:id", function (req, res) {
     });
 });
 
+//Search API
+app.get("/find/:name", function (req, res) {
+  var regex = new RegExp(req.params.name);
+  user
+    .find({ name: regex })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err, "Not Find");
+      res.send("not find");
+    });
+});
+
 app.post("/", (req, res) => {
   const userdata = new user({
     name: req.body.name,
@@ -97,7 +111,7 @@ app.post("/signup", async (req, res) => {
     const signup = await new SignUp({
       username: req.body.username,
       useremail: req.body.useremail,
-      password:bcrypt.hashSync(req.body.password,10),
+      password: bcrypt.hashSync(req.body.password, 10),
     });
     const token = jwt.sign({ signup }, "abcd123", {
       expiresIn: "2h",
@@ -128,8 +142,8 @@ app.post("/auth", async (req, res) => {
       // save user token
       user.token = token;
 
-      // user
       res.status(200).json(user);
+      // user
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {

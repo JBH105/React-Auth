@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Updete from "./Updete";
@@ -15,6 +15,8 @@ export default class Profile extends Component {
       reload: false,
       popup: false,
       id: "",
+      serach: "",
+      noData: false,
     };
   }
   componentDidMount() {
@@ -53,11 +55,62 @@ export default class Profile extends Component {
     this.setState({ popup: !this.state.popup });
     console.log(this.state.popup);
   }
+  //Search API
+  Search(key) {
+    // console.warn(key);
+    fetch("http://localhost:8000/find/" + key).then((result) => {
+      result.json().then((res) => {
+        // console.warn("Find",res);
+        // console.warn(this.state.serach);
+        if (res.length > 0) {
+          this.setState({ serach: res, noData: false });
+        } else {
+          this.setState({ noData: true, serach: null });
+        }
+      });
+    });
+  }
 
   render() {
     console.log(this.state.id);
     return (
       <div>
+        <input
+          type="Search  "
+          placeholder="Search"
+          onChange={(e) => {
+            this.Search(e.target.value);
+          }}
+        ></input>
+
+        {this.state.serach ? (
+          <div>
+          <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Number</th>
+            </tr>
+          </thead>
+            <tbody>
+              {this.state.serach.map((list) => (
+              
+                  <tr>
+                    <td>{list.name}</td>
+                    <td>{list.email}</td>
+                    <td>{list.address}</td>
+                    <td>{list.number}</td>
+                  </tr>
+              
+              ))}
+            </tbody>
+          </Table>
+          </div>
+        ) : null}
+        {this.state.noData ? <h3>No Data Found</h3> : null}
+
         {this.state.list ? (
           <div>
             <Table striped bordered hover>
